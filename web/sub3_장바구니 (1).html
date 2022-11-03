@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/soon.css">
+    <link rel="stylesheet" href="css/common.css">
+    
+    <script src="http://code.jQuery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#cat_title").click(function() {
+            $("#cate").slideToggle("slow");
+        });
+
+        let [mainX, mainY] = [0, 0];
+        let [moveX, moveY] = [0, 0];
+        let count = 0;
+
+        document.addEventListener('mousemove', onMouseMove);
+
+        function onMouseMove(event) {
+            moveAt(event.pageX, event.pageY);
+        }
+
+        function moveAt(pageX, pageY) { //마우스가 움직일 때마다 마우스 위치가 들어감.
+            moveX = pageX;
+            moveY = pageY;
+        }
+
+        // let timer = setInterval(() => {
+        //     if(moveX !== mainX || moveY !== mainY) {
+        //             mainX = moveX;
+        //             mainY = moveY;
+        //             count = 0; //움직였으니까 0
+        //     } else {
+        //             count++;
+        //     }
+        //     if(count === 10) {
+        //         alert('마우스를 움직이세요');
+        //     }
+        // }, 1000);
+
+        const i1 = document.querySelector('#i1'); //합계
+        const i2 = document.querySelector('#i2'); //합계
+        const checkbox1 = document.querySelector('#item1'); //체크박스 1
+        const checkbox2 = document.querySelector('#item2'); //체크박스 2
+        const add1 = document.querySelector('#add1'); //상품 구매 금액1
+        const add2 = document.querySelector('#add2'); //상품 구매 금액2
+        const total1 = document.querySelector('#total1'); //총 구매액1
+        const total2 = document.querySelector('#total2'); //총 구매액2
+        const select1 = document.querySelector('.select1');
+        const select2 = document.querySelector('.select2');
+        let tem1 = 0;
+        let tem2 = 0;
+        let value1 = 1;
+        let value2 = 1;
+
+        select1.addEventListener('change', (event) => {
+            value1 = Number(event.currentTarget.value); // 수량 들어있음
+            sum();
+        });
+
+        select2.addEventListener('change', (event) => {
+            value2 = Number(event.currentTarget.value); // 수량 들어있음
+            sum();
+        });
+
+        checkbox1.addEventListener('change', (event) => {
+            if(event.currentTarget.checked) {
+                tem1 = 22000;
+                i1.textContent = `${tem1 * value1}원`;
+                sum();
+            } else {
+                i1.textContent = '0'
+                tem1 = 0;
+                sum();
+            }
+        });
+        checkbox2.addEventListener('change', (event) => {
+            if(event.currentTarget.checked) {
+                tem2 = 19000;
+                i2.textContent = `${tem2*value1 + 3000}원`;
+                sum();
+            } else {
+                i2.textContent = '0';
+                tem2 = 0;
+                sum();
+            }
+        });
+
+        function sum() {
+            add1.textContent = `${(tem1*value1)+(tem2*value2)}원`    
+            total1.textContent = `${(tem1*value1)+(tem2*value2)+3000}원`
+            add2.textContent = `${(tem1*value1)+(tem2*value2)}원`
+            total2.textContent = `${(tem1*value1)+(tem2*value2)+3000}원`
+        }
+    });
+    </script>
+</head>
+<body>
+    <header>
+        <section id="top">
+            <a id="logo" href="main_통합.html"><img src="img/logo.png"></a>
+            <div id="search">
+                <div id="search_title">SEARCH</div>
+                <div id="search_form"><input type="text"></div>
+                <div id="search_button"><img src="img/btn_search.png"></div>
+            </div>
+            <nav id="top_menu">
+                <ul>
+                    <li class="green"><a href="#">로그인</a></li>
+                    <li class="green"><a href="#">회원가입</a></li>
+                    <li><a href="#">마이페이지</a></li>
+                    <li><a href="#">이용안내</a></li>
+                    <li><a href="#">고객센터</a></li>
+                </ul>
+            </nav> <!--top_menu-->
+            <div class="clear"></div>
+        </section> <!--section top-->
+        <nav id="main_menu">
+            <ul>
+                <li><a href="sub2_상품설명.html">상세 페이지</a></li>
+                <li><a href="sub3_장바구니.html">장바구니</a></li>
+                <li><a href="#">고객 갤러리</a></li>
+                <li><a href="#">주문배송</a></li>
+                <li><a href="#">자주 하는 질문</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="body_back">
+        <section id = "main">
+        <section id = "cat1">
+         <div id ="cat_title">
+             CATEGORY ITEM
+         </div>
+         <ul id="cate"> <!--왼쪽 배너 카테고리들-->
+             <li><a href="#">생활 아트</a></li>
+             <li><a href="#">캔버스 아트</a></li>
+             <li><a href="#">사진 벽지</a></li>
+             <li><a href="#">창문형/현관문형</a></li>
+             <li><a href="#">포인트 벽지</a></li>
+             <li><a href="#">세계지도</a></li>
+             <li><a href="#">앤티크 세계지도</a></li>
+             <li><a href="#">입체 세계지도 벽지</a></li>
+             <li><a href="#">어린이방 세계지도</a></li>
+             <li><a href="#">족자형 롤스크린</a></li>
+             <li><a href="#">맞춤제작 결제창</a></li>
+         </ul>
+         </section> <!--section cat1 끝-->   
+    </section>
+    
+    <section id="right">
+        <h2 id="cart_title">
+            <span>SHOPPING CART </span>장바구니
+        </h2>
+        <div id="process">
+            <img src="img/process.png" >
+        </div>
+
+        <table>
+            <tr class="title">
+                <th>선택</th>
+                <th>상품명</th>
+                <th>판매가</th>
+                <th>수량</th>
+                <th>적립금</th>
+                <th>배송비</th>
+                <th>합계</th>
+            </tr>
+            <tr class="items">
+                <td class="col1"><input id="item1" type="checkbox"></td>
+                <td class="col2">
+                    sjdy-005 펄실크 벽지/가로 125cmx세로 90cm
+                </td>
+                <td class="col3">22,000원</td>
+                <td class="col4">
+                    <select class="select1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </td>
+                <td class="col5">100원</td>
+                <td class="col6">무료배송</td>
+                <td class="col7" id="i1">0</td>
+            </tr>
+            <tr class="items">
+                <td class="col1"><input id="item2" type="checkbox"></td>
+                <td class="col2">
+                    sjdy-005 펄실크 벽지/가로 125cmx세로 90cm
+                </td>
+                <td class="col3">19,000원</td>
+                <td class="col4">
+                    <select class="select2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </td>
+                <td class="col5">100원</td>
+                <td class="col6">3000원</td>
+                <td class="col7" id="i2">0</td>
+            </tr>
+            <tr class="total_price">
+                <td colspan="7">
+                    [상품 구매 금액] : <span id="add1">0</span> + [배송비] : 3000 = [총구매액] : <span id="total1">3000원</span>
+                </td>
+            </tr>
+            <tr class="order_status_box">
+                <td colspan="7">
+                    <div class="order_status">
+                        <p><span>고객님의 총 주문 합계 금액입니다</span></p>
+                    <div>
+                    <ul>
+                        <li class="col1">[상품 구매 금액]:</li>
+                        <li class="col2" id="add2">0원</li>
+                    </ul>
+                    <ul>
+                        <li class="col1">배송비:</li>
+                        <li class="col2">3000원</li>
+                    </ul>
+                    <ul>
+                        <li class="col1"><span>총 주문 합계 금액</span></li>
+                        <li class="col2"><span id="total2">3000원</span></li>
+                    </ul>
+                </div>
+            </div>
+                </td>
+            </tr>
+        </table>
+        <ul id="order_buttons">
+            <li><a href="#"><img src="img/order_button1.png" ></a></li>
+            <li><a href="#"><img src="img/order_button2.png" ></a></li>
+            <li><a href="#"><img src="img/order_button3.png" ></a></li>
+            <li><a href="#"><img src="img/order_button4.png" ></a></li>
+            <li><a href="#"><img src="img/order_button5.png" ></a></li>
+            <li><a href="#"><img src="img/order_button6.png" ></a></li>
+        </ul>
+    </section>
+        <footer>
+            <section id="footer_menu_box">
+                <nav id="footer_menu">
+                    <ul>
+                        <li><a href="#">회사소개</a></li>
+                        <li><a href="#">이용안내</a></li>
+                        <li><a href="#">장바구니</a></li>
+                        <li><a href="#">주문조회</a></li>
+                        <li><a href="#">적립금</a></li>
+                        <li><a href="#">이용약관</a></li>
+                        <li><a href="#">개인정보보호정책</a></li>
+                        <li><a href="#">고객센터</a></li>
+                    </ul>
+                </nav>
+            </section> <!--section footer_menu_box-->
+            <section id="footer_box">
+                <div id="footer_logo">
+                    <img src="img/logo.png">
+                </div>
+                <div id="address">
+                    <img src="img/address.png">
+                </div>
+                <div id="footer_banner">
+                    <img src="img/footer_banner_01.JPG">
+                </div>
+            </section> <!--section footer_box-->
+        </footer>
+</body>
+</html>
